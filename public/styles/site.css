@@ -34,13 +34,13 @@ body {
 
 .container {
   position: fixed;
-  top: 3px;
-  right: 5px;
+  top: 0px;
+  right: 0px;
   display: inline-block;
 }
 
 .user-controlls {
-  margin: 6px 2px;
+  margin: 10px 5px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,4 +72,9 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+/* styles for lines added by clipboard inserter */
+p {
+  margin: 15px 0px;
 }
