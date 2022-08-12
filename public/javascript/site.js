@@ -1,89 +1,66 @@
-$(document).ready(function(){
-  //The text inserter/scroller and the counter begin here.
+(() => {
+  document.addEventListener("DOMContentLoaded", () => {
+    // The text inserter/scroller and the counter begin here.
+    let previousLinesCount = 0;
+    let charsCount = 0;
 
-  //These are needed later.
-  oldlines = 0;
-  chars = 0;
+    document.addEventListener("DOMNodeInserted", () => {
+      // Counter begins here. Get the current number of lines first.
+      let currentLinesCount = document.getElementsByTagName("p").length;
 
-  //This listens for a node (line) to be inserted.
-  document.addEventListener("DOMNodeInserted", function () {
+      // Second, confirm whether the node insertion was a new line.
+      // (Rikai also inserts and removes a node (a div).)
+      let newLinesCount = currentLinesCount - previousLinesCount;
+      if (newLinesCount > 0) {
+        // If it is a new line, do a character count of the line and add it to the running tally.
+        const newestLine = document.getElementsByTagName("p")[currentLinesCount - 1].textContent;
+        const newCharsCount = charsCount + newestLine.length;
 
-    //Counter begins here. Get the current number of lines first.
-    var lines = document.getElementsByTagName('p').length;
+        // Update the new counts in the counter.
+        document.querySelector("#counter").textContent = `${newCharsCount.toLocaleString()} / ${currentLinesCount.toLocaleString()}`;
 
-    //Second, confirm whether the node insertion was a new line.
-    //(Rikai also inserts and removes a node (a div).)
-    var isnew = lines - oldlines;
-    if (isnew > 0) {
-      // If it is a new line, do a character count of the line and add it to the running tally.
-      var i=lines-1
-      var newline = document.getElementsByTagName('p')[i].innerHTML;
-      var linechars = newline.length;
-      newchars = chars + linechars;
+        // Get ready for the next line.
+        previousLinesCount = currentLinesCount;
+        charsCount = newCharsCount;
 
-      //Make the numbers look nice.
-      var charsdisp = newchars.toLocaleString();
-      var linesdisp = lines.toLocaleString();
+        // The counter ends here and the text-scroller is below.
+        // I've included it in the "if new line" statement.
+        // (That is, it won't run unless a new line was added.)
+        // Like this it won't autoscroll down every time Rikai is used.
 
-      //Print the new counts into the counter.
-      jQuery('#counter').text(charsdisp+' / '+linesdisp);
+        var LEEWAY = 200; // Amount of "leeway" pixels before latching onto the bottom.
 
-      //Get ready for the next line.
-      oldlines = lines;
-      chars = newchars;
+        // Some obscene browser shit because making sense is for dweebs
+        var b = document.body;
+        var offset = b.scrollHeight - b.offsetHeight;
+        var scrollPos = (b.scrollTop+offset);
+        var scrollBottom = (b.scrollHeight - (b.clientHeight+offset));
 
-      //The counter ends here and the text-scroller is below.
-      //I've included it in the "if new line" statement.
-      //(That is, it won't run unless a new line was added.)
-      //Like this it won't autoscroll down every time Rikai is used.
+        // If we are at the bottom, go to the bottom again.
+        if (scrollPos >= scrollBottom - LEEWAY) {
+          window.scrollTo(0,document.body.scrollHeight);
+        }
 
-      var LEEWAY = 200; // Amount of "leeway" pixels before latching onto the bottom.
+      }; // This is the end of the "if new line" statement.
 
-      // Some obscene browser shit because making sense is for dweebs
-      var b = document.body;
-      var offset = b.scrollHeight - b.offsetHeight;
-      var scrollPos = (b.scrollTop+offset);
-      var scrollBottom = (b.scrollHeight - (b.clientHeight+offset));
-
-      // If we are at the bottom, go to the bottom again.
-      if (scrollPos >= scrollBottom - LEEWAY) {
-        window.scrollTo(0,document.body.scrollHeight);
-      }
-
-    }; //This is the end of the "if new line" statement.
-
-  }, false);
-  // === End of scroller and counter script. ===
+    }, false);
+    // === End of scroller and counter script. ===
 
 
-  // === Beginning of "remove last line" script. ===
+    // === Beginning of "remove last line" script. ===
+    document.getElementById("removeButton").addEventListener("click", () => {
+      // Check whether there are any lines to remove.
+      var linesToRemove = document.getElementsByTagName("p").length;
+      if (linesToRemove > 0) {
+        const lastLine = document.getElementsByTagName("p")[currentLinesCount - 1].textContent;
+        document.querySelector("body").removeChild(lastLine);
+        document.querySelector("#counter").textContent = `${(charsCount - lastLine.length).toLocaleString()} / ${(currentLinesCount - 1).toLocaleString()}`;
 
-  //Listen for click.
-  document.getElementById("remove_button").addEventListener("click", function() {
-
-    //Check whether there are any lines.
-    var remove_lines = document.getElementsByTagName('p').length;
-    if (remove_lines > 0) {
-
-      //If there are, find the last line and do a character count.
-      var q = remove_lines - 1;
-      var last = document.getElementsByTagName('p')[q].innerHTML;
-      var lastlen = last.length;
-
-      //Remove the last line.
-      $('body').children('p:last').remove();
-
-      //Update the counter.
-      var newch = chars - lastlen;
-      var newchdisp = newch.toLocaleString();
-      var newl = oldlines - 1;
-      var newldisp = newl.toLocaleString();
-      jQuery('#counter').text(newchdisp+' / '+newldisp);
-
-      //Prepare for next line.
-      chars = newch;
-      oldlines = newl;
-    };
+        // Prepare for next line.
+        previousLinesCount = currentLinesCount - 1;
+        charsCount = charsCount - lastLine.length;
+      };
+    });
+    // === End of "remove last line" script. ===
   });
-  // === End of "remove last line" script. ===
-});
+})();

@@ -24,43 +24,52 @@ body {
   color: #BCBCBC;
   font-size: 1.5em;
   font-weight: 400;
-  line-height:150%;
-  margin-top:10%;
-  margin-left:10%;
-  margin-right:10%;
-  margin-bottom:20%;
-  font-family: "Noto Serif JP", "Meiryo", serif;}
+  line-height: 150%;
+  margin-top: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 20%;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
 
 .container {
-  position:fixed;
-  top:3px;
-  right:5px;
-  display:inline-block;
+  position: fixed;
+  top: 3px;
+  right: 5px;
+  display: inline-block;
+}
+
+.user-controlls {
+  margin: 6px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  float: right;
 }
 
 #counter {
-  background-color:rgba(25,25,25,0.8);
-  color:#9d9d9d;
-  font-size:.4em;
-  line-height:100%;
-  float:left;
-  padding-left:8px;
-  padding-right:8px;
-  padding-top:5px;
-  padding-bottom:5px;
+  background-color: rgba(25,25,25,0.8);
+  color :#9d9d9d;
+  font-size: 18px;
+  line-height: 100%;
+  padding: 8px 2px 8px 12px;
 }
 
-#remove_button {
-  background-color:rgba(25,25,25,0.8);
-  color:#9d9d9d;
-  font-size:.4em;
-  line-height:100%;
-  float:right;
-  margin-right:10px;
-  padding-left:8px;
-  padding-right:8px;
-  padding-top:5px;
-  padding-bottom:5px;
-  cursor:pointer;
-  cursor:hand;
+#removeButton {
+  -webkit-appearance: none;
+  font-weight: 400;
+  text-decoration: none;
+  padding: 0px 8px;
+  border-style: solid;
+  background-color: rgba(25,25,25,0.8);;
+  border-color: rgba(25,25,25,0.8);;
+  color: #9d9d9d;
+  font-size: 26px;
+  width: fit-content;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
