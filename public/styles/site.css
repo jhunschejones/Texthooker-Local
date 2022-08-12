@@ -1,0 +1,66 @@
+/*
+  === Comment from origional styles on https://texthooker.com/ ===
+
+  To change background color or text color, just replace the style values above with the hex values for the colors you want.
+  If you want the background of the counter to remain semi-transparent, you must use rgb values like above. The last number (where I've put 0.8) is the opacity level (1.0 = completely opaque).
+  To change font size, just change the em value to what works for you (the standard size is 1, I like it at 1.5).
+  To change font weight (boldness), just edit the value above.  100 is quite thin, 400 is default, 900 is quite thick.  You may want it higher than default for Mincho fonts.
+  The line-height value changes the spacing between lines.
+
+  To use the font of your choice, remove the list of fonts above and put the ENGLISH name of your font in quotation marks (some JP font names are in Japanese, such as "Ã¤Â¸â€°Ã¦Â¬Â¡Ã¥â€¦Æ’Ã¥Ë†â€¡Ã§ÂµÂµÃ¥Â­â€”").
+  Be sure to leave a semi-colon at the end of the line.
+  To find the English name of a given font, first install it, then open Firefox.
+  Go to about:preferences#content in the address bar, then click on the 'Default font' drop-down menu.
+  The "correct" name of your font will be listed here - just copy that down and paste it up above.
+
+  Note that if you would like to use your browser default font, replace the font-family line with font-family:""; or delete it altogether.
+  Your default is probably Gothic - if you want to try out a good Mincho font, try Aozora Mincho at http://www.freejapanesefont.com/aozora-mincho-download/
+  For various other free Japanese fonts, visit http://www.freejapanesefont.com/
+  For more font attribute information visit http://www.w3schools.com/css/css_font.asp
+*/
+
+body {
+  background-color: #202020;
+  color: #BCBCBC;
+  font-size: 1.5em;
+  font-weight: 400;
+  line-height:150%;
+  margin-top:10%;
+  margin-left:10%;
+  margin-right:10%;
+  margin-bottom:20%;
+  font-family: "Noto Serif JP", "Meiryo", serif;}
+
+.container {
+  position:fixed;
+  top:3px;
+  right:5px;
+  display:inline-block;
+}
+
+#counter {
+  background-color:rgba(25,25,25,0.8);
+  color:#9d9d9d;
+  font-size:.4em;
+  line-height:100%;
+  float:left;
+  padding-left:8px;
+  padding-right:8px;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+#remove_button {
+  background-color:rgba(25,25,25,0.8);
+  color:#9d9d9d;
+  font-size:.4em;
+  line-height:100%;
+  float:right;
+  margin-right:10px;
+  padding-left:8px;
+  padding-right:8px;
+  padding-top:5px;
+  padding-bottom:5px;
+  cursor:pointer;
+  cursor:hand;
+}
