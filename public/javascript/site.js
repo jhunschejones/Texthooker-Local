@@ -9,12 +9,13 @@
 
       // Next, confirm whether the node insertion was a new line.
       // (Rikai also inserts and removes a div node.)
-      const previousLinesCount = document.querySelector("#counter").textContent.split(" / ")[1];
+      const previousLinesCount = parseInt(document.querySelector("#counter").textContent.split(" / ")[1]);
       const newLinesCount = currentLinesCount - previousLinesCount;
       if (newLinesCount > 0) {
         // If it is a new line, do a character count of the line and add it to the running tally.
         const newestLine = document.getElementsByTagName("p")[currentLinesCount - 1];
-        const previousCarsCount = document.querySelector("#counter").textContent.split(" / ")[0];
+        newestLine.textContent = newestLine.textContent.trim(); // remove spaces in lines
+        const previousCarsCount = parseInt(document.querySelector("#counter").textContent.split(" / ")[0]);
         const newCharsCount = previousCarsCount + newestLine.textContent.length;
 
         // Update the new counts in the counter.
@@ -48,12 +49,11 @@
       // Check whether there are any lines to remove.
       const linesToRemove = document.getElementsByTagName("p").length;
       if (linesToRemove > 0) {
-        const currentLinesCount = document.querySelector("#counter").textContent.split(" / ")[1];
-        console.log(currentLinesCount)
+        const currentLinesCount = parseInt(document.querySelector("#counter").textContent.split(" / ")[1]);
         const lastLine = document.getElementsByTagName("p")[currentLinesCount - 1];
         document.querySelector("body").removeChild(lastLine);
 
-        const previousCarsCount = document.querySelector("#counter").textContent.split(" / ")[0];
+        const previousCarsCount = parseInt(document.querySelector("#counter").textContent.split(" / ")[0]);
         document.querySelector("#counter").textContent = `${(previousCarsCount - lastLine.textContent.length).toLocaleString()} / ${(currentLinesCount - 1).toLocaleString()}`;
       };
     });
