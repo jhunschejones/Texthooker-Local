@@ -16,7 +16,7 @@
         const newestLine = document.getElementsByTagName("p")[currentLinesCount - 1];
         newestLine.textContent = newestLine.textContent.trim(); // remove spaces in lines
         const previousCarsCount = parseInt(document.querySelector("#counter").textContent.split(" / ")[0]);
-        const newCharsCount = previousCarsCount + newestLine.textContent.length;
+        const newCharsCount = previousCarsCount + newestLine.textContent.trim().length;
 
         // Update the new counts in the counter.
         document.querySelector("#counter").textContent = `${newCharsCount.toLocaleString()} / ${currentLinesCount.toLocaleString()}`;
@@ -54,7 +54,7 @@
         document.querySelector("body").removeChild(lastLine);
 
         const previousCarsCount = parseInt(document.querySelector("#counter").textContent.split(" / ")[0]);
-        document.querySelector("#counter").textContent = `${(previousCarsCount - lastLine.textContent.length).toLocaleString()} / ${(currentLinesCount - 1).toLocaleString()}`;
+        document.querySelector("#counter").textContent = `${(previousCarsCount - lastLine.textContent.trim().length).toLocaleString()} / ${(currentLinesCount - 1).toLocaleString()}`;
       };
     });
     // === End of "remove last line" script. ===
