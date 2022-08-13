@@ -60,9 +60,9 @@
       const linesToRemove = document.getElementsByTagName("p");
 
       if (linesToRemove.length > 0) {
-        for (line of linesToRemove) {
+        Array.from(linesToRemove).forEach((line) => {
           document.querySelector("body").removeChild(line);
-        }
+        });
         document.querySelector("#counter").textContent = "0";
       };
     });
