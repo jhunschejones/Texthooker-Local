@@ -60,10 +60,10 @@ body {
   -webkit-appearance: none;
   font-weight: 400;
   text-decoration: none;
-  padding: 0px 8px;
+  padding: 1px 10px 1px 8px;
   border-style: solid;
-  background-color: rgba(25,25,25,0.8);;
-  border-color: rgba(25,25,25,0.8);;
+  background-color: rgba(25,25,25,0.8);
+  border-color: rgba(25,25,25,0.8);
   color: #9d9d9d;
   font-size: 26px;
   width: fit-content;
@@ -72,9 +72,19 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: fit-content;
 }
 
-/* styles for lines added by clipboard inserter */
+.arrow-container {
+  margin-bottom: -2px;
+}
+
+.arrow {
+  transform: rotate(230deg);
+  display: block;
+}
+
+/* styles for lines added by cliboard inserter */
 p {
   margin: 18px 0px;
 }
