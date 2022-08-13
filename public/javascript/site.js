@@ -9,17 +9,15 @@
 
       // Next, confirm whether the node insertion was a new line.
       // (Rikai also inserts and removes a div node.)
-      const previousLinesCount = parseInt(document.querySelector("#counter").textContent.split(" / ")[1]);
+      const previousLinesCount = parseInt(document.querySelector("#counter").textContent);
       const newLinesCount = currentLinesCount - previousLinesCount;
       if (newLinesCount > 0) {
         // If it is a new line, do a character count of the line and add it to the running tally.
         const newestLine = document.getElementsByTagName("p")[currentLinesCount - 1];
         newestLine.textContent = newestLine.textContent.trim(); // remove spaces in lines
-        const previousCarsCount = parseInt(document.querySelector("#counter").textContent.split(" / ")[0]);
-        const newCharsCount = previousCarsCount + newestLine.textContent.trim().length;
 
         // Update the new counts in the counter.
-        document.querySelector("#counter").textContent = `${newCharsCount.toLocaleString()} / ${currentLinesCount.toLocaleString()}`;
+        document.querySelector("#counter").textContent = currentLinesCount.toLocaleString();
 
         // The counter ends here and the text-scroller is below.
         // I've included it in the "if new line" statement.
@@ -28,7 +26,6 @@
 
         const LEEWAY = 200; // Amount of "leeway" pixels before latching onto the bottom.
 
-        // Some obscene browser shit because making sense is for dweebs
         const body = document.body;
         const offset = body.scrollHeight - body.offsetHeight;
         const scrollPosition = (body.scrollTop + offset);
@@ -45,18 +42,30 @@
 
 
     // === Beginning of "remove last line" script. ===
-    document.getElementById("removeButton").addEventListener("click", () => {
+    document.getElementById("undoButton").addEventListener("click", () => {
       // Check whether there are any lines to remove.
-      const linesToRemove = document.getElementsByTagName("p").length;
-      if (linesToRemove > 0) {
-        const currentLinesCount = parseInt(document.querySelector("#counter").textContent.split(" / ")[1]);
+      const linesToRemove = document.getElementsByTagName("p");
+      if (linesToRemove.length > 0) {
+        const currentLinesCount = parseInt(document.querySelector("#counter").textContent);
         const lastLine = document.getElementsByTagName("p")[currentLinesCount - 1];
         document.querySelector("body").removeChild(lastLine);
-
-        const previousCarsCount = parseInt(document.querySelector("#counter").textContent.split(" / ")[0]);
-        document.querySelector("#counter").textContent = `${(previousCarsCount - lastLine.textContent.trim().length).toLocaleString()} / ${(currentLinesCount - 1).toLocaleString()}`;
+        document.querySelector("#counter").textContent = (currentLinesCount - 1).toLocaleString();
       };
     });
     // === End of "remove last line" script. ===
+
+    // === Beginning of "clear all lines" script. ===
+    document.getElementById("clearButton").addEventListener("click", () => {
+      // Check whether there are any lines to remove.
+      const linesToRemove = document.getElementsByTagName("p");
+
+      if (linesToRemove.length > 0) {
+        for (line of linesToRemove) {
+          document.querySelector("body").removeChild(line);
+        }
+        document.querySelector("#counter").textContent = "0";
+      };
+    });
+    // === End of "clear all lines" script. ===
   });
 })();
