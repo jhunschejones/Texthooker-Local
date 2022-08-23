@@ -25,10 +25,7 @@ body {
   font-size: 1.5em;
   font-weight: 400;
   line-height: 150%;
-  margin-top: 10%;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-bottom: 20%;
+  margin: 10%;
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
